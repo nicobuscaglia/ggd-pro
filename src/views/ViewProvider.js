@@ -7,7 +7,39 @@ import {
   PatientNotes,
   SymptomBotResult,
   VitalsBotResult,
+  BenefitsChecker,
+  ProviderTabs
 } from "../components";
+
+const ResultsTabs = [
+  {
+    title: "Patient Intake",
+    component: <PatientIntake />,
+  },
+  {
+    title: "SymptomBot",
+    component: <SymptomBotResult />,
+  },
+  {
+    title: "VitalsBot",
+    component: <VitalsBotResult />,
+  },
+  {
+    title: "BenefitsChecker",
+    component: <BenefitsChecker />,
+  },
+];
+
+const NotesTabs = [
+  {
+    title: "Medical Notes",
+    component: <MedicalNotes />,
+  },
+  {
+    title: "Patient Notes",
+    component: <PatientNotes />,
+  },
+];
 
 const ViewProvider = () => {
   return (
@@ -16,13 +48,11 @@ const ViewProvider = () => {
         <Typography variant="h1">Hi James May NP</Typography>
       </Box>
       <Grid container>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={12} sm={8}>
           Video Visit
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <PatientIntake />
-          <SymptomBotResult />
-          <VitalsBotResult />
+        <Grid item xs={12} sm={4}>
+          <ProviderTabs tabs={ResultsTabs} />
         </Grid>
       </Grid>
       <Paper variant="outlined">
@@ -30,8 +60,7 @@ const ViewProvider = () => {
           <Typography gutterBottom>Provider Actions</Typography>
           <Grid container>
             <Grid item xs={12} sm={4}>
-              <MedicalNotes />
-              <PatientNotes />
+              <ProviderTabs tabs={NotesTabs} />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Diagnosis />
