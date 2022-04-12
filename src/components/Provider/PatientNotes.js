@@ -1,5 +1,5 @@
 const PatientNotes = () => {
-  return <p>Patient Notes</p>;
+  return null;
 };
 
 export { PatientNotes };
