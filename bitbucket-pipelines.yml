@@ -11,6 +11,7 @@ pipelines:
             - export CI=false
             - npm install -g serverless
             - npm install
+            - echo REACT_APP_VIDEO_VISIT_URL=$REACT_APP_VIDEO_VISIT_URL >> .env
             - export SLS_DEBUG=*
             - serverless config credentials --provider aws --key ${AWS_PROD_ACCESS_KEY_ID} --secret ${AWS_PROD_SECRET_ACCESS_KEY}
             - serverless deploy --stage prod --region us-east-2
@@ -24,6 +25,7 @@ pipelines:
             - export CI=false
             - npm install -g serverless
             - npm install
+            - echo REACT_APP_VIDEO_VISIT_URL=$REACT_APP_VIDEO_VISIT_URL >> .env
             - export SLS_DEBUG=*
             - serverless config credentials --provider aws --key ${AWS_NONPROD_ACCESS_KEY_ID} --secret ${AWS_NONPROD_SECRET_ACCESS_KEY}
             - serverless deploy --stage dev --region us-east-2
