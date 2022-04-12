@@ -1,2 +1,3 @@
-export { PatientIntake, SymptomBotResult, VitalsBotResult } from "./Patient";
+export { PatientIntake, SymptomBotResult, VitalsBotResult, BenefitsChecker } from "./Patient";
 export { Diagnosis, MedicalNotes, PatientNotes, EPrescribe } from "./Provider";
+export { ProviderTabs } from "./ProviderTabs"
