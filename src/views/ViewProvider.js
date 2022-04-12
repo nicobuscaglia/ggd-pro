@@ -8,6 +8,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import {
+  Header,
+  ProviderHeader,
   Diagnosis,
   EPrescribe,
   MedicalNotes,
@@ -19,7 +21,6 @@ import {
   ProviderTabs,
   VideoVisit,
 } from "../components";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 const LINK = process.env.REACT_APP_VIDEO_VISIT_URL;
 
@@ -80,22 +81,9 @@ const ViewProvider = () => {
 
   return (
     <Container maxWidth="xl" className={classes.container}>
-      <Box mb={2} display="flex" alignItems="center">
-        <Box mr={1}>
-          <Typography variant="h3">Hi James May NP</Typography>
-        </Box>
-        <FiberManualRecordIcon className={classes.dot} />
-        <Box mr={1}>
-          <Typography variant="body2" color="textSecondary">
-            Acne Prescription Visit
-          </Typography>
-        </Box>
-        <FiberManualRecordIcon className={classes.dot} />
-        <Box mr={1}>
-          <Typography variant="body2" color="textSecondary">
-            22 hours ago.
-          </Typography>
-        </Box>
+      <Header />
+      <Box mb={2}>
+        <ProviderHeader />
       </Box>
       <Box mb={2}>
         <Grid container spacing={2}>
