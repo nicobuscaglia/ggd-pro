@@ -1,0 +1,44 @@
+image: node:14.18-alpine
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to PROD useast2
+          deployment: prod
+          script:
+            - apk update
+            - export SKIP_PREFLIGHT_CHECK=true
+            - export CI=false
+            - npm install -g serverless
+            - npm install
+            - export SLS_DEBUG=*
+            - serverless config credentials --provider aws --key ${AWS_PROD_ACCESS_KEY_ID} --secret ${AWS_PROD_SECRET_ACCESS_KEY}
+            - serverless deploy --stage prod --region us-east-2
+    develop:
+      - step:
+          name: Deploy to DEV useast2
+          deployment: dev
+          script:
+            - apk update
+            - export SKIP_PREFLIGHT_CHECK=true
+            - export CI=false
+            - npm install -g serverless
+            - npm install
+            - export SLS_DEBUG=*
+            - serverless config credentials --provider aws --key ${AWS_NONPROD_ACCESS_KEY_ID} --secret ${AWS_NONPROD_SECRET_ACCESS_KEY}
+            - serverless deploy --stage dev --region us-east-2
+    qa:
+      - step:
+          name: Deploy to QA useast2
+          deployment: qa
+          script:
+            - apk update
+            - npm install -g serverless
+            - npm install
+            - (cd src/sync-consult && npm i && npm audit fix)
+            - (cd src/token && npm i && npm audit fix)
+            - (cd src/calendar && npm i && npm audit fix)
+            - (cd ui && npm i)
+            - export SLS_DEBUG=*
+            - serverless config credentials --stage qa --provider aws --key ${AWS_KEY} --secret ${AWS_SECRET}
+            - serverless deploy --stage qa --region us-east-2

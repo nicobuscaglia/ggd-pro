@@ -14,6 +14,8 @@ import {
   PatientNotes,
   SymptomBotResult,
   VitalsBotResult,
+  BenefitsChecker,
+  ProviderTabs,
 } from "../components";
 
 const useClasses = makeStyles((theme) => ({
@@ -28,6 +30,35 @@ const useClasses = makeStyles((theme) => ({
   },
   subTitleWithDot: {},
 }));
+const ResultsTabs = [
+  {
+    title: "Patient Intake",
+    component: <PatientIntake />,
+  },
+  {
+    title: "SymptomBot",
+    component: <SymptomBotResult />,
+  },
+  {
+    title: "VitalsBot",
+    component: <VitalsBotResult />,
+  },
+  {
+    title: "BenefitsChecker",
+    component: <BenefitsChecker />,
+  },
+];
+
+const NotesTabs = [
+  {
+    title: "Medical Notes",
+    component: <MedicalNotes />,
+  },
+  {
+    title: "Patient Notes",
+    component: <PatientNotes />,
+  },
+];
 
 const ViewProvider = () => {
   const classes = useClasses();
@@ -42,13 +73,11 @@ const ViewProvider = () => {
         </Typography>
       </Box>
       <Grid container>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={12} sm={8}>
           Video Visit
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <PatientIntake />
-          <SymptomBotResult />
-          <VitalsBotResult />
+        <Grid item xs={12} sm={4}>
+          <ProviderTabs tabs={ResultsTabs} />
         </Grid>
       </Grid>
       <Paper variant="outlined" style={{ backgroundColor: "transparent" }}>
@@ -58,8 +87,7 @@ const ViewProvider = () => {
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
-              <MedicalNotes />
-              <PatientNotes />
+              <ProviderTabs tabs={NotesTabs} />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Diagnosis />
