@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Container,
   Typography,
@@ -16,11 +17,16 @@ import {
   VitalsBotResult,
   BenefitsChecker,
   ProviderTabs,
+  VideoVisit,
 } from "../components";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+
+const LINK = process.env.REACT_APP_VIDEO_VISIT_URL;
 
 const useClasses = makeStyles((theme) => ({
   container: {
-    backgroundColor: "#f7f7f7",
+    minHeight: "100vh",
+    backgroundColor: theme.palette.ggd.gray,
     padding: "24px",
   },
   subtitle: {
@@ -29,7 +35,15 @@ const useClasses = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   subTitleWithDot: {},
+  dot: {
+    fontSize: "5px !important",
+    position: "relative",
+    color: theme.palette.text.secondary,
+    marginRight: "7px",
+    marginLeft: "7px",
+  },
 }));
+
 const ResultsTabs = [
   {
     title: "Patient Intake",
@@ -62,24 +76,37 @@ const NotesTabs = [
 
 const ViewProvider = () => {
   const classes = useClasses();
+  const [type, setType] = useState('sync')
 
   return (
-    <Container maxWidth="lg" className={classes.container}>
-      <Box mb={2}>
-        <Typography variant="h1">
-          Hi James May NP{" "}
-          <span className={classes.subtitle}>Acne Prescription Visit</span>{" "}
-          <span></span>
-        </Typography>
+    <Container maxWidth="xl" className={classes.container}>
+      <Box mb={2} display="flex" alignItems="center">
+        <Box mr={1}>
+          <Typography variant="h3">Hi James May NP</Typography>
+        </Box>
+        <FiberManualRecordIcon className={classes.dot} />
+        <Box mr={1}>
+          <Typography variant="body2" color="textSecondary">
+            Acne Prescription Visit
+          </Typography>
+        </Box>
+        <FiberManualRecordIcon className={classes.dot} />
+        <Box mr={1}>
+          <Typography variant="body2" color="textSecondary">
+            22 hours ago.
+          </Typography>
+        </Box>
       </Box>
-      <Grid container>
-        <Grid item xs={12} sm={8}>
-          Video Visit
+      <Box mb={2}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={8} style={{ minHeight: "70vh" }}>
+            {type === "sync" ? <VideoVisit link={LINK} /> : <>Chat</>}
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <ProviderTabs tabs={ResultsTabs} />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <ProviderTabs tabs={ResultsTabs} />
-        </Grid>
-      </Grid>
+      </Box>
       <Paper variant="outlined" style={{ backgroundColor: "transparent" }}>
         <Box p={2}>
           <Typography variant="h6" color="textSecondary" paragraph>
