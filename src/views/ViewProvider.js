@@ -1,4 +1,11 @@
-import { Container, Typography, Box, Grid, Paper } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Box,
+  Grid,
+  Paper,
+  makeStyles,
+} from "@material-ui/core";
 import {
   Diagnosis,
   EPrescribe,
@@ -8,9 +15,21 @@ import {
   SymptomBotResult,
   VitalsBotResult,
   BenefitsChecker,
-  ProviderTabs
+  ProviderTabs,
 } from "../components";
 
+const useClasses = makeStyles((theme) => ({
+  container: {
+    backgroundColor: "#f7f7f7",
+    padding: "24px",
+  },
+  subtitle: {
+    fontSize: "1rem",
+    fontWeight: 500,
+    color: theme.palette.text.secondary,
+  },
+  subTitleWithDot: {},
+}));
 const ResultsTabs = [
   {
     title: "Patient Intake",
@@ -42,10 +61,16 @@ const NotesTabs = [
 ];
 
 const ViewProvider = () => {
+  const classes = useClasses();
+
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg" className={classes.container}>
       <Box mb={2}>
-        <Typography variant="h1">Hi James May NP</Typography>
+        <Typography variant="h1">
+          Hi James May NP{" "}
+          <span className={classes.subtitle}>Acne Prescription Visit</span>{" "}
+          <span></span>
+        </Typography>
       </Box>
       <Grid container>
         <Grid item xs={12} sm={8}>
@@ -55,10 +80,12 @@ const ViewProvider = () => {
           <ProviderTabs tabs={ResultsTabs} />
         </Grid>
       </Grid>
-      <Paper variant="outlined">
+      <Paper variant="outlined" style={{ backgroundColor: "transparent" }}>
         <Box p={2}>
-          <Typography gutterBottom>Provider Actions</Typography>
-          <Grid container>
+          <Typography variant="h6" color="textSecondary" paragraph>
+            Provider Actions
+          </Typography>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <ProviderTabs tabs={NotesTabs} />
             </Grid>
