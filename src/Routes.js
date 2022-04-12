@@ -1,18 +1,11 @@
-import { Typography } from "@material-ui/core";
 import { BrowserRouter, Routes as Switch, Route } from "react-router-dom";
+import { ViewProvider } from "./views";
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
-          path="/"
-          element={
-            <Typography variant="h1" color="textSecondary">
-              GGDPro Lite
-            </Typography>
-          }
-        />
+        <Route path="/" element={<ViewProvider />} />
       </Switch>
     </BrowserRouter>
   );
