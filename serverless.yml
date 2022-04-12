@@ -1,0 +1,96 @@
+service: ggd-pfe-ui
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, "dev"}
+  region: ${opt:region, "us-east-2"}
+  stackTags:
+    REPOSITORY: "ggd-pfe-ui"
+plugins:
+  - fullstack-serverless
+
+custom:
+  dev:
+    sub_domain: dev-
+    certificate_arn: arn:aws:acm:us-east-1:588088951988:certificate/833ac1ef-c8b9-4cf7-ac72-e184d3677673
+  prod:
+    sub_domain: ""
+    # certificate_arn: arn:aws:acm:us-east-1:588088951988:certificate/833ac1ef-c8b9-4cf7-ac72-e184d3677673
+  fullstack:
+    domain: ${self:custom.${self:provider.stage}.sub_domain}provider.gogetdoc.com
+    certificate: ${self:custom.${self:provider.stage}.certificate_arn}
+    bucketName: ${self:provider.stage}
+    distributionFolder: ./build
+    indexDocument: index.html
+    errorDocument: index.html
+    singlePageApp: false
+    invalidationPaths:
+      - /index.html
+    compressWebContent: false
+    clientCommand: "npm run build"
+    clientSrcPath: ./src
+    noConfirm: true
+    minimumProtocolVersion: TLSv1.2_2021
+resources:
+  Resources:
+    OriginAccessIdentity:
+      Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+      Properties:
+        CloudFrontOriginAccessIdentityConfig:
+          Comment: !Sub GGDPro assets in S3
+  extensions:
+    WebAppS3BucketPolicy:
+      Properties:
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+              Resource: !Join
+                - ""
+                - - !GetAtt WebAppS3Bucket.Arn
+                  - "/*"
+              Principal:
+                CanonicalUser: !GetAtt OriginAccessIdentity.S3CanonicalUserId
+    ApiDistribution:
+      Properties:
+        DistributionConfig:
+          Origins:
+            - Id: WebApp
+              DomainName: !GetAtt WebAppS3Bucket.DomainName
+              S3OriginConfig:
+                OriginAccessIdentity: !Join
+                  - /
+                  - - origin-access-identity
+                    - cloudfront
+                    - !Ref OriginAccessIdentity
+          Enabled: true
+          HttpVersion: http2
+          Comment: Serverless Managed ${self:provider.stage}-${self:service}
+          Aliases:
+            - ${self:custom.${self:provider.stage}.sub_domain}provider.gogetdoc.com
+          PriceClass: PriceClass_All
+          DefaultRootObject: index.html
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: false
+            TargetOriginId: WebApp
+            ForwardedValues:
+              QueryString: "false"
+              Cookies:
+                Forward: none
+            ViewerProtocolPolicy: redirect-to-https
+          ViewerCertificate:
+            AcmCertificateArn: ${self:custom.${self:provider.stage}.certificate_arn}
+            SslSupportMethod: sni-only
+            MinimumProtocolVersion: TLSv1.2_2021
+          CustomErrorResponses:
+            - ErrorCode: 403
+              ResponseCode: 200
+              ResponsePagePath: /index.html
