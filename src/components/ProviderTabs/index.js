@@ -2,6 +2,12 @@ import { useState } from 'react'
 import { Box, Tabs, Tab, makeStyles } from "@material-ui/core";
 
 const useClasses = makeStyles((theme) => ({
+  container: {
+    height: '100%',
+    backgroundColor: theme.palette.background.default,
+    borderRadius: '1rem',
+    padding: '1rem 0',
+  },
   tabs: {
     "&.MuiTabs-root": {
       minHeight: 0,
@@ -52,7 +58,7 @@ const ProviderTabs = ({ tabs }) => {
   };
 
   return (
-    <Box>
+    <Box className={classes.container}>
       <Tabs
         value={value}
         onChange={handleChange}
