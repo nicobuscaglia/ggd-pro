@@ -1,5 +1,12 @@
 import { useState } from 'react'
-import { Container, Typography, Box, Grid, Paper, makeStyles } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Box,
+  Grid,
+  Paper,
+  makeStyles,
+} from "@material-ui/core";
 import {
   Diagnosis,
   EPrescribe,
@@ -20,7 +27,14 @@ const useClasses = makeStyles((theme) => ({
   container: {
     minHeight: "100vh",
     backgroundColor: theme.palette.ggd.gray,
+    padding: "24px",
   },
+  subtitle: {
+    fontSize: "1rem",
+    fontWeight: 500,
+    color: theme.palette.text.secondary,
+  },
+  subTitleWithDot: {},
   dot: {
     fontSize: "5px !important",
     position: "relative",
@@ -85,7 +99,7 @@ const ViewProvider = () => {
       </Box>
       <Box mb={2}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={8} style={{ minHeight: "60vh" }}>
+          <Grid item xs={12} sm={8} style={{ minHeight: "70vh" }}>
             {type === "sync" ? <VideoVisit link={LINK} /> : <>Chat</>}
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -93,10 +107,12 @@ const ViewProvider = () => {
           </Grid>
         </Grid>
       </Box>
-      <Paper variant="outlined">
+      <Paper variant="outlined" style={{ backgroundColor: "transparent" }}>
         <Box p={2}>
-          <Typography gutterBottom>Provider Actions</Typography>
-          <Grid container>
+          <Typography variant="h6" color="textSecondary" paragraph>
+            Provider Actions
+          </Typography>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <ProviderTabs tabs={NotesTabs} />
             </Grid>
