@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid, makeStyles } from "@material-ui/core";
 import { TextBubble } from "./TextBubble";
 import PropTypes from "prop-types";
