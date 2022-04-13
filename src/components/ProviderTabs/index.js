@@ -3,10 +3,14 @@ import { Box, Tabs, Tab, makeStyles } from "@material-ui/core";
 
 const useClasses = makeStyles((theme) => ({
   container: {
-    height: '100%',
+    height: "100%",
     backgroundColor: theme.palette.background.default,
-    borderRadius: '1rem',
-    padding: '1rem 0',
+    borderRadius: "1rem",
+    padding: "1rem 0",
+  },
+  fixedContainer: {
+    maxHeight: "60vh",
+    overflow: "scroll",
   },
   tabs: {
     "&.MuiTabs-root": {
@@ -73,12 +77,9 @@ const ProviderTabs = ({ tabs }) => {
       </Tabs>
       {tabs.map((tab, index) => {
         return (
-          <TabPanel
-            key={index}
-            value={value}
-            index={index}
-            children={tab.component}
-          />
+          <Box key={index} className={classes.fixedContainer}>
+            <TabPanel value={value} index={index} children={tab.component} />
+          </Box>
         );
       })}
     </Box>
