@@ -1,4 +1,10 @@
 export { MessageGroup } from "./MessageGroup"
+export { UserAnswerGroup } from "./UserAnswerGroup"
 export { TextBubble } from "./TextBubble"
 export { TypingIndicator } from "./TypingIndicator"
 export { GGDLoader } from "./GGDLoader"
+export { ValidatedAnswer } from './ValidatedAnswer'
+export { UserImagePreview } from './UserImagePreview'
+export { UserPdfPreview } from './UserPdfPreview'
+export { PharmacyPreview } from './PharmacyPreview'
+export { DataGrid } from "./DataGrid"

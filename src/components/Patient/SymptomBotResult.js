@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { MessageGroup } from "../Common";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { InformationCard } from "../Cards/InformationCard";
+import { InformationCard } from "../Cards";
 
 const useClasses = makeStyles((theme) => ({
   progressBar: {

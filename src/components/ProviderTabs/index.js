@@ -15,6 +15,9 @@ const useClasses = makeStyles((theme) => ({
   tabs: {
     "&.MuiTabs-root": {
       minHeight: 0,
+      borderBottom: "1px solid",
+      borderBottomColor: theme.palette.ggd.darkGray,
+      paddingBottom: "0.7rem",
     },
     "& .MuiButtonBase-root.MuiTab-root": {
       fontSize: "1rem",
@@ -25,13 +28,6 @@ const useClasses = makeStyles((theme) => ({
     },
     "& .MuiTabs-indicator": {
       display: "none",
-    },
-    "& .MuiTab-textColorInherit.Mui-selected": {
-      color: "#000",
-      borderRadius: "20px",
-    },
-    "& .MuiTabs-flexContainer": {
-      marginLeft: theme.spacing(1),
     },
   },
 }));
