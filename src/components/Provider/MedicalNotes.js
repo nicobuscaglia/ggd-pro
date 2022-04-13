@@ -16,7 +16,7 @@ const MedicalNotes = () => {
             fullWidth
             autoFocus
             multiline
-            rows={4}
+            minRows={4}
             InputProps={{
               disableUnderline: true,
             }}

@@ -30,6 +30,11 @@ const useClasses = makeStyles((theme) => ({
     backgroundColor: theme.palette.ggd.gray,
     padding: "24px",
   },
+  fixedContainer: {
+    minHeight: '70vh',
+    maxHeight: '70vh',
+    overflow: 'hidden'
+  },
   subtitle: {
     fontSize: "1rem",
     fontWeight: 500,
@@ -87,10 +92,10 @@ const ViewProvider = () => {
       </Box>
       <Box mb={2}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={8} style={{ minHeight: "70vh" }}>
+          <Grid item xs={12} sm={8} className={classes.fixedContainer}>
             {type === "sync" ? <VideoVisit link={LINK} /> : <>Chat</>}
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} className={classes.fixedContainer}>
             <ProviderTabs tabs={ResultsTabs} />
           </Grid>
         </Grid>
