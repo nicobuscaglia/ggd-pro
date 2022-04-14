@@ -78,11 +78,7 @@ const CAPTIONS = {
   },
 };
 
-const SymptomBotResult = ({
-  msgId,
-  messages,
-  results = {},
-}) => {
+const SymptomBotResult = ({ msgId, messages, results = {} }) => {
   const classes = useClasses();
 
   results = {
@@ -138,7 +134,9 @@ const SymptomBotResult = ({
     .map((symptom) => symptom.commonName);
 
   return (
-    <Box>
+    // TODO: Adding padding around this component for now to fix
+    // padding issue. Eventually add padding to display component
+    <Box p={2}>
       <MessageGroup
         messages={messages || [CAPTIONS.here["en-us"]]}
         messageId={msgId}

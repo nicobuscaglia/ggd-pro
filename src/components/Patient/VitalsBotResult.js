@@ -146,7 +146,7 @@ const VitalsBotResult = ({ conversationId, showMessage = true }) => {
       case "5":
         return "Very high";
       default:
-        return "Unknown"
+        return "Unknown";
     }
   };
 
@@ -189,7 +189,9 @@ const VitalsBotResult = ({ conversationId, showMessage = true }) => {
   }
 
   return (
-    <>
+    // TODO: Adding padding around this component for now to fix
+    // padding issue. Eventually add padding to display component
+    <Box p={2}>
       {showMessage && (
         <MessageGroup
           messages={["Here are patient results"]}
@@ -216,7 +218,7 @@ const VitalsBotResult = ({ conversationId, showMessage = true }) => {
           }
         })}
       </Box>
-    </>
+    </Box>
   );
 };
 

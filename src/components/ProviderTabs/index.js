@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import { Box, Tabs, Tab, makeStyles } from "@material-ui/core";
 
 const useClasses = makeStyles((theme) => ({
@@ -24,7 +24,7 @@ const useClasses = makeStyles((theme) => ({
       fontFamily: "Roboto",
       minWidth: 0,
       minHeight: "25px",
-      padding: "2px 12px",
+      padding: "0 12px",
     },
     "& .MuiTabs-indicator": {
       display: "none",
@@ -36,21 +36,14 @@ const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
-      hidden={value !== index}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <>{children}</>
-        </Box>
-      )}
+    <div hidden={value !== index} {...other}>
+      {value === index && <Box>{children}</Box>}
     </div>
   );
-}
+};
 
 const ProviderTabs = ({ tabs }) => {
-  const classes = useClasses()
+  const classes = useClasses();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Container,
   Typography,
@@ -31,9 +31,9 @@ const useClasses = makeStyles((theme) => ({
     padding: "24px",
   },
   fixedContainer: {
-    minHeight: '70vh',
-    maxHeight: '70vh',
-    overflow: 'hidden'
+    minHeight: "70vh",
+    maxHeight: "70vh",
+    overflow: "hidden",
   },
   subtitle: {
     fontSize: "1rem",
@@ -69,25 +69,44 @@ const ResultsTabs = [
   },
 ];
 
-const NotesTabs = [
-  {
-    title: "Medical Notes",
-    component: <MedicalNotes />,
-  },
-  {
-    title: "Patient Notes",
-    component: <PatientNotes />,
-  },
-];
-
 const ViewProvider = () => {
   const classes = useClasses();
-  const [type, setType] = useState('sync')
+
+  const [type, setType] = useState("sync");
+  const [consultInformation, setConsultInformation] = useState({});
+
+  const updateConsultInformation = (newConsultInformation) => {
+    setConsultInformation((consultInformation) => ({
+      ...consultInformation,
+      ...newConsultInformation,
+    }));
+  };
+
+  const NotesTabs = [
+    {
+      title: "Medical Notes",
+      component: (
+        <MedicalNotes
+          consultInformation={consultInformation}
+          updateConsultInformation={updateConsultInformation}
+        />
+      ),
+    },
+    {
+      title: "Patient Notes",
+      component: (
+        <PatientNotes
+          consultInformation={consultInformation}
+          updateConsultInformation={updateConsultInformation}
+        />
+      ),
+    },
+  ];
 
   return (
     <Container maxWidth="xl" className={classes.container}>
       <Header />
-      <Box mb={2}>
+      <Box my={2}>
         <ProviderHeader />
       </Box>
       <Box mb={2}>
