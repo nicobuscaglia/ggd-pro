@@ -1,5 +1,7 @@
+import { BenefitsCheckerWalletCard } from "../Cards/BenefitsCheckerWalletCard";
+
 const BenefitsChecker = () => {
-  return <p>Benefits Checker</p>;
+  return <BenefitsCheckerWalletCard />;
 };
 
 export { BenefitsChecker };
