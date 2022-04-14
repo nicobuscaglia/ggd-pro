@@ -8,9 +8,16 @@ const useClasses = makeStyles((theme) => ({
     borderRadius: "1rem",
     padding: "1rem 0",
   },
+  fixedContainer: {
+    maxHeight: "60vh",
+    overflow: "scroll",
+  },
   tabs: {
     "&.MuiTabs-root": {
       minHeight: 0,
+      borderBottom: "1px solid",
+      borderBottomColor: theme.palette.ggd.darkGray,
+      paddingBottom: "0.7rem",
     },
     "& .MuiButtonBase-root.MuiTab-root": {
       fontSize: "1rem",
@@ -21,13 +28,6 @@ const useClasses = makeStyles((theme) => ({
     },
     "& .MuiTabs-indicator": {
       display: "none",
-    },
-    "& .MuiTab-textColorInherit.Mui-selected": {
-      color: "#000",
-      borderRadius: "20px",
-    },
-    "& .MuiTabs-flexContainer": {
-      marginLeft: theme.spacing(1),
     },
   },
 }));
@@ -69,12 +69,9 @@ const ProviderTabs = ({ tabs, updateConsultData }) => {
       </Box>
       {tabs.map((tab, index) => {
         return (
-          <TabPanel
-            key={index}
-            value={value}
-            index={index}
-            children={tab.component}
-          />
+          <Box key={index} className={classes.fixedContainer}>
+            <TabPanel value={value} index={index} children={tab.component} />
+          </Box>
         );
       })}
     </Box>
