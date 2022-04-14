@@ -2,6 +2,7 @@ export { PatientIntake, SymptomBotResult, VitalsBotResult, BenefitsChecker } fro
 export { Diagnosis, MedicalNotes, PatientNotes, EPrescribe } from "./Provider";
 export { ProviderTabs } from "./ProviderTabs"
 export { VideoVisit } from "./VideoVisit";
+export { ChatHOC } from "./Chat/ChatHOC"
 export { Header } from './Header';
 export { ProviderHeader } from "./ProviderHeader";
 export { Logo } from "./Logo";

@@ -11,7 +11,7 @@ const MemberChat = ( {conversation }) => {
 
       const RenderTextMessage = (message, msgId, chatTime) => {
         return (
-          <Box my={2}>
+          <Box my={2} key={msgId}>
             <MessageGroup
               messages={[message]}
               messageId={msgId}
@@ -24,6 +24,7 @@ const MemberChat = ( {conversation }) => {
       const renderUserAnswer = (answer, msgId, createdOn, msgTypeId) => {
         return (
           <UserAnswerGroup
+            key={msgId}
             alignRight
             msgTypeId={msgTypeId}
             messages={[stripHtml(answer || "").result]}
