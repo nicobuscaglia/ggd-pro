@@ -4,8 +4,29 @@ import {
   Paper,
   Box,
   Typography,
+  Grid,
+  Card,
+  CardContent,
+  IconButton,
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
+import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
+import { useState } from "react";
+
+const MOCK_OPTIONS = [
+  {
+    id: 1,
+    label: "Influenza with pneumonia, other influenza virus identified",
+    details: "Influenzal (broncho)pneumonia, other influenza virus identified",
+    icd10Code: "J10.0",
+  },
+  {
+    id: 2,
+    label:
+      "Influenza with other respiratory manifestations, other influenza virus identified",
+    icd10Code: "J10.1",
+  },
+];
 
 const useClasses = makeStyles((theme) => ({
   input: {
@@ -22,6 +43,19 @@ const useClasses = makeStyles((theme) => ({
 const Diagnosis = () => {
   const classes = useClasses();
 
+  const [diagnosis, setDiagnosis] = useState([]);
+
+  const handleSelect = (value) => {
+    setDiagnosis((diagnosis) => [...diagnosis, value]);
+  };
+
+  const handleDelete = (condition) =>
+    setDiagnosis((diagnosis) =>
+      diagnosis.filter(
+        (currentCondition) => currentCondition.id !== condition.id
+      )
+    );
+
   return (
     <Paper style={{ height: "100%" }}>
       <Box p={2}>
@@ -29,16 +63,13 @@ const Diagnosis = () => {
           Diagnosis
         </Typography>
         <Autocomplete
-          autoHighlight
+          disableClearable
+          onChange={(e, value) => value && handleSelect(value)}
           noOptionsText="No results"
-          id="insurance-provider-lookup"
-          options={[]}
-          filterOptions={(options) => options}
-          getOptionLabel={(option) => option.payer_name}
-          getOptionSelected={(option, value) =>
-            option.payer_name === value.payer_name
-          }
-          onInputChange={(e) => console.log(e)}
+          id="diagnosis-lookup"
+          options={MOCK_OPTIONS}
+          getOptionLabel={(option) => option.label}
+          getOptionSelected={(option, value) => option.label === value.label}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -53,6 +84,37 @@ const Diagnosis = () => {
             />
           )}
         />
+        {/* TBD: decide how to display selected conditions once selected */}
+        {diagnosis.length > 0 && (
+          <Box my={2}>
+            <Grid container spacing={2}>
+              {diagnosis.map((diagnosis) => (
+                <Grid item key={diagnosis.id} xs={12}>
+                  <Card elevation={2}>
+                    <CardContent>
+                      <Typography variant="h6" gutterBottom>
+                        {diagnosis.icd10Code}
+                      </Typography>
+                      <Typography variant="body2" gutterBottom>
+                        {diagnosis.label}
+                      </Typography>
+                      {diagnosis.details && (
+                        <Typography variant="body2" color="textSecondary">
+                          {diagnosis.details}
+                        </Typography>
+                      )}
+                      <Box align="right" mt={1}>
+                        <IconButton onClick={() => handleDelete(diagnosis)}>
+                          <HighlightOffRoundedIcon />
+                        </IconButton>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        )}
       </Box>
     </Paper>
   );
