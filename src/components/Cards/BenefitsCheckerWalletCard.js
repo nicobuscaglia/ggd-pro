@@ -28,76 +28,83 @@ const hasActiveCoverage = (data) => {
 
 const BenefitsCheckerWalletCard = () => {
   return (
-    <Paper variant="outlined" style={{ backgroundColor: "#FAFAFB" }}>
-      <Box p={2}>
-        <Typography variant="subtitle1" style={{ color: "#696974" }}>
-          Benefits Checker
-        </Typography>
-        <Box p={2} style={{ backgroundColor: "#fff", borderRadius: 10 }} mt={2}>
-          <Typography
-            paragraph
-            align="center"
-            variant="subtitle1"
-            style={{ color: "#696974" }}
+    <Box p={2}>
+      <Paper variant="outlined" style={{ backgroundColor: "#FAFAFB" }}>
+        <Box p={2}>
+          <Typography variant="subtitle1" style={{ color: "#696974" }}>
+            Benefits Checker
+          </Typography>
+          <Box
+            p={2}
+            style={{ backgroundColor: "#fff", borderRadius: 10 }}
+            mt={2}
           >
-            Benefit Status
-          </Typography>
-          {hasActiveCoverage(MOCK_DATA) ? (
-            <Grid container justifyContent="center" spacing={2}>
-              <Grid item xs={6}>
-                <Box
-                  style={{ backgroundColor: "#f1f1f1", borderRadius: 10 }}
-                  p={2}
-                  textAlign="center"
-                >
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    style={{ fontWeight: 500 }}
-                  >
-                    DEDUCTIBLE
-                  </Typography>
-                  <Typography>
-                    ${MOCK_DATA.deductible.yearToDate}/$
-                    {MOCK_DATA.deductible.remaining}
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={6}>
-                <Box
-                  style={{ backgroundColor: "#f1f1f1", borderRadius: 10 }}
-                  p={2}
-                  textAlign="center"
-                >
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    style={{ fontWeight: 500 }}
-                  >
-                    OOPMAX
-                  </Typography>
-                  <Typography>
-                    ${MOCK_DATA.oopMax.yearToDate}/${MOCK_DATA.oopMax.remaining}
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          ) : (
-            <Typography variant="body2" color="error" align="center">
-              Inactive coverage
+            <Typography
+              paragraph
+              align="center"
+              variant="subtitle1"
+              style={{ color: "#696974" }}
+            >
+              Benefit Status
             </Typography>
-          )}
+            {hasActiveCoverage(MOCK_DATA) ? (
+              <Grid container justifyContent="center" spacing={2}>
+                <Grid item xs={6}>
+                  <Box
+                    style={{ backgroundColor: "#f1f1f1", borderRadius: 10 }}
+                    p={2}
+                    textAlign="center"
+                  >
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      style={{ fontWeight: 500 }}
+                    >
+                      DEDUCTIBLE
+                    </Typography>
+                    <Typography>
+                      ${MOCK_DATA.deductible.yearToDate}/$
+                      {MOCK_DATA.deductible.remaining}
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={6}>
+                  <Box
+                    style={{ backgroundColor: "#f1f1f1", borderRadius: 10 }}
+                    p={2}
+                    textAlign="center"
+                  >
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      style={{ fontWeight: 500 }}
+                    >
+                      OOPMAX
+                    </Typography>
+                    <Typography>
+                      ${MOCK_DATA.oopMax.yearToDate}/$
+                      {MOCK_DATA.oopMax.remaining}
+                    </Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+            ) : (
+              <Typography variant="body2" color="error" align="center">
+                Inactive coverage
+              </Typography>
+            )}
+          </Box>
+          <Box mt={2}>
+            <Typography variant="subtitle2" color="textSecondary">
+              DATE OF REQUEST
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              {getFormattedDateTimeString("2022-03-25", "short")}
+            </Typography>
+          </Box>
         </Box>
-        <Box mt={2}>
-          <Typography variant="subtitle2" color="textSecondary">
-            DATE OF REQUEST
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            {getFormattedDateTimeString("2022-03-25", "short")}
-          </Typography>
-        </Box>
-      </Box>
-    </Paper>
+      </Paper>
+    </Box>
   );
 };
 
