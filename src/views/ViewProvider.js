@@ -94,7 +94,12 @@ const ViewProvider = () => {
     },
     {
       title: "Patient Notes",
-      component: <PatientNotes />,
+      component: (
+        <PatientNotes
+          consultInformation={consultInformation}
+          updateConsultInformation={updateConsultInformation}
+        />
+      ),
     },
   ];
 
