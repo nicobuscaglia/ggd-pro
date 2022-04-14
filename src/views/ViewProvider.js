@@ -20,9 +20,11 @@ import {
   BenefitsChecker,
   ProviderTabs,
   VideoVisit,
+  ChatHOC
 } from "../components";
+import { useParams } from "react-router-dom";
 
-const LINK = process.env.REACT_APP_VIDEO_VISIT_URL;
+const LINK = `${process.env.REACT_APP_VIDEO_VISIT_URL}/room/nicolas-buscaglia-general-visit-2022-1-1-18-55/member/Patient/practitioner/Provider`;
 
 const useClasses = makeStyles((theme) => ({
   container: {
@@ -71,8 +73,8 @@ const ResultsTabs = [
 
 const ViewProvider = () => {
   const classes = useClasses();
+  const { type } = useParams();
 
-  const [type, setType] = useState("sync");
   const [consultInformation, setConsultInformation] = useState({});
 
   const updateConsultInformation = (newConsultInformation) => {
@@ -112,7 +114,7 @@ const ViewProvider = () => {
       <Box mb={2}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={8} className={classes.fixedContainer}>
-            {type === "sync" ? <VideoVisit link={LINK} /> : <>Chat</>}
+            {type === "async" ? <ChatHOC /> : <VideoVisit link={LINK} />}
           </Grid>
           <Grid item xs={12} sm={4} className={classes.fixedContainer}>
             <ProviderTabs tabs={ResultsTabs} />

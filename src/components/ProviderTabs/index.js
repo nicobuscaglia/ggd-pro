@@ -5,7 +5,7 @@ const useClasses = makeStyles((theme) => ({
   container: {
     height: "100%",
     backgroundColor: theme.palette.background.default,
-    borderRadius: "1rem",
+    borderRadius: "0.5rem",
     padding: "1rem 0",
   },
   fixedContainer: {

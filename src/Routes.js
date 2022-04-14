@@ -6,6 +6,7 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" element={<ViewProvider />} />
+        <Route path="/:type" element={<ViewProvider />} />
       </Switch>
     </BrowserRouter>
   );
