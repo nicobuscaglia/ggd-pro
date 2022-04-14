@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Container,
   Typography,
@@ -64,25 +64,39 @@ const ResultsTabs = [
   },
 ];
 
-const NotesTabs = [
-  {
-    title: "Medical Notes",
-    component: <MedicalNotes />,
-  },
-  {
-    title: "Patient Notes",
-    component: <PatientNotes />,
-  },
-];
-
 const ViewProvider = () => {
   const classes = useClasses();
-  const [type, setType] = useState('sync')
+
+  const [type, setType] = useState("sync");
+  const [consultInformation, setConsultInformation] = useState({});
+
+  const updateConsultInformation = (newConsultInformation) => {
+    setConsultInformation((consultInformation) => ({
+      ...consultInformation,
+      ...newConsultInformation,
+    }));
+  };
+
+  const NotesTabs = [
+    {
+      title: "Medical Notes",
+      component: (
+        <MedicalNotes
+          consultInformation={consultInformation}
+          updateConsultInformation={updateConsultInformation}
+        />
+      ),
+    },
+    {
+      title: "Patient Notes",
+      component: <PatientNotes />,
+    },
+  ];
 
   return (
     <Container maxWidth="xl" className={classes.container}>
       <Header />
-      <Box mb={2}>
+      <Box my={2}>
         <ProviderHeader />
       </Box>
       <Box mb={2}>
@@ -91,7 +105,9 @@ const ViewProvider = () => {
             {type === "sync" ? <VideoVisit link={LINK} /> : <>Chat</>}
           </Grid>
           <Grid item xs={12} sm={4}>
-            <ProviderTabs tabs={ResultsTabs} />
+            <Paper>
+              <ProviderTabs tabs={ResultsTabs} />
+            </Paper>
           </Grid>
         </Grid>
       </Box>

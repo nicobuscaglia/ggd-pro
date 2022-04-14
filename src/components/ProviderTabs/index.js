@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import { Box, Tabs, Tab, makeStyles } from "@material-ui/core";
+import { useState } from "react";
+import { Box, Tabs, Tab, makeStyles, Divider } from "@material-ui/core";
 
 const useClasses = makeStyles((theme) => ({
   container: {
-    height: '100%',
+    height: "100%",
     backgroundColor: theme.palette.background.default,
-    borderRadius: '1rem',
-    padding: '1rem 0',
+    borderRadius: "1rem",
+    padding: "1rem 0",
   },
   tabs: {
     "&.MuiTabs-root": {
@@ -17,7 +17,7 @@ const useClasses = makeStyles((theme) => ({
       fontFamily: "Roboto",
       minWidth: 0,
       minHeight: "25px",
-      padding: "2px 12px",
+      padding: "0 12px",
     },
     "& .MuiTabs-indicator": {
       display: "none",
@@ -36,21 +36,14 @@ const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
-      hidden={value !== index}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <>{children}</>
-        </Box>
-      )}
+    <div hidden={value !== index} {...other}>
+      {value === index && <Box>{children}</Box>}
     </div>
   );
-}
+};
 
-const ProviderTabs = ({ tabs }) => {
-  const classes = useClasses()
+const ProviderTabs = ({ tabs, updateConsultData }) => {
+  const classes = useClasses();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -71,6 +64,9 @@ const ProviderTabs = ({ tabs }) => {
           return <Tab key={index} label={tab.title} />;
         })}
       </Tabs>
+      <Box my={2}>
+        <Divider />
+      </Box>
       {tabs.map((tab, index) => {
         return (
           <TabPanel
