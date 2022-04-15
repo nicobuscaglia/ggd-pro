@@ -146,6 +146,8 @@ const ViewProvider = () => {
             </Grid>
           </Box>
         </Paper>
+        {/* Temp. solution to create space for drawer. */}
+        <Box py={4}></Box>
       </Container>
       <Drawer anchor="bottom" variant="permanent">
         <Paper square>
