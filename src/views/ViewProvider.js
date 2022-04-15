@@ -6,7 +6,10 @@ import {
   Grid,
   Paper,
   makeStyles,
+  Button,
+  Drawer,
 } from "@material-ui/core";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import {
   Header,
   ProviderHeader,
@@ -20,7 +23,7 @@ import {
   BenefitsChecker,
   ProviderTabs,
   VideoVisit,
-  ChatHOC
+  ChatHOC,
 } from "../components";
 import { useParams } from "react-router-dom";
 
@@ -42,7 +45,6 @@ const useClasses = makeStyles((theme) => ({
     fontWeight: 500,
     color: theme.palette.text.secondary,
   },
-  subTitleWithDot: {},
   dot: {
     fontSize: "5px !important",
     position: "relative",
@@ -69,6 +71,11 @@ const ResultsTabs = [
     title: "BenefitsChecker",
     component: <BenefitsChecker />,
   },
+];
+
+const requiredFields = [
+  { label: "Medical Notes", stateKey: "medicalNote" },
+  { label: "Patient Notes", stateKey: "patientNote" },
 ];
 
 const ViewProvider = () => {
@@ -106,40 +113,88 @@ const ViewProvider = () => {
   ];
 
   return (
-    <Container maxWidth="xl" className={classes.container}>
-      <Header />
-      <Box my={2}>
-        <ProviderHeader />
-      </Box>
-      <Box mb={2}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={8} className={classes.fixedContainer}>
-            {type === "async" ? <ChatHOC /> : <VideoVisit link={LINK} />}
-          </Grid>
-          <Grid item xs={12} sm={4} className={classes.fixedContainer}>
-            <ProviderTabs tabs={ResultsTabs} />
-          </Grid>
-        </Grid>
-      </Box>
-      <Paper variant="outlined" style={{ backgroundColor: "transparent" }}>
-        <Box p={2}>
-          <Typography variant="h6" color="textSecondary" paragraph>
-            Provider Actions
-          </Typography>
+    <>
+      <Container maxWidth="xl" className={classes.container}>
+        <Header />
+        <Box my={2}>
+          <ProviderHeader />
+        </Box>
+        <Box mb={2}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={4}>
-              <ProviderTabs tabs={NotesTabs} />
+            <Grid item xs={12} sm={8} className={classes.fixedContainer}>
+              {type === "async" ? <ChatHOC /> : <VideoVisit link={LINK} />}
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <Diagnosis />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <EPrescribe />
+            <Grid item xs={12} sm={4} className={classes.fixedContainer}>
+              <ProviderTabs tabs={ResultsTabs} />
             </Grid>
           </Grid>
         </Box>
-      </Paper>
-    </Container>
+        <Paper variant="outlined" style={{ backgroundColor: "transparent" }}>
+          <Box p={2}>
+            <Typography variant="h6" color="textSecondary" paragraph>
+              Provider Actions
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={4}>
+                <ProviderTabs tabs={NotesTabs} />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Diagnosis />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <EPrescribe />
+              </Grid>
+            </Grid>
+          </Box>
+        </Paper>
+        {/* Temp. solution to create space for drawer. */}
+        <Box py={4}></Box>
+      </Container>
+      <Drawer anchor="bottom" variant="permanent">
+        <Paper square>
+          <Box p={2}>
+            <Grid
+              container
+              spacing={2}
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              {requiredFields.map((data) => (
+                <Grid
+                  item
+                  style={{
+                    color: consultInformation[data.stateKey] ? "green" : "#bbb",
+                  }}
+                >
+                  <Grid container spacing={1} alignItems="center">
+                    <Grid item>
+                      <Typography variant="body2">{data.label}</Typography>
+                    </Grid>
+                    <Grid item>
+                      <CheckCircleOutlinedIcon
+                        fontSize="small"
+                        color="inherit"
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              ))}
+              <Grid item>
+                <Button
+                  color="secondary"
+                  disabled={
+                    !consultInformation.medicalNote ||
+                    !consultInformation.patientNote
+                  }
+                >
+                  Complete Visit
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Paper>
+      </Drawer>
+    </>
   );
 };
 
