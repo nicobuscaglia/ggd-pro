@@ -7,6 +7,7 @@ import {
   Paper,
   makeStyles,
   Button,
+  Drawer,
 } from "@material-ui/core";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import {
@@ -22,10 +23,11 @@ import {
   BenefitsChecker,
   ProviderTabs,
   VideoVisit,
+  ChatHOC,
 } from "../components";
-import { Drawer } from "@mui/material";
+import { useParams } from "react-router-dom";
 
-const LINK = process.env.REACT_APP_VIDEO_VISIT_URL;
+const LINK = `${process.env.REACT_APP_VIDEO_VISIT_URL}/room/nicolas-buscaglia-general-visit-2022-1-1-18-55/member/Patient/practitioner/Provider`;
 
 const useClasses = makeStyles((theme) => ({
   container: {
@@ -43,7 +45,6 @@ const useClasses = makeStyles((theme) => ({
     fontWeight: 500,
     color: theme.palette.text.secondary,
   },
-  subTitleWithDot: {},
   dot: {
     fontSize: "5px !important",
     position: "relative",
@@ -79,8 +80,8 @@ const requiredFields = [
 
 const ViewProvider = () => {
   const classes = useClasses();
+  const { type } = useParams();
 
-  const [type, setType] = useState("sync");
   const [consultInformation, setConsultInformation] = useState({});
 
   const updateConsultInformation = (newConsultInformation) => {
@@ -121,7 +122,7 @@ const ViewProvider = () => {
         <Box mb={2}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={8} className={classes.fixedContainer}>
-              {type === "sync" ? <VideoVisit link={LINK} /> : <>Chat</>}
+              {type === "async" ? <ChatHOC /> : <VideoVisit link={LINK} />}
             </Grid>
             <Grid item xs={12} sm={4} className={classes.fixedContainer}>
               <ProviderTabs tabs={ResultsTabs} />
