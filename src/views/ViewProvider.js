@@ -1,14 +1,13 @@
 import { useState } from "react";
 import {
-  Container,
   Typography,
   Box,
   Grid,
   Paper,
-  makeStyles,
   Button,
   Drawer,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import {
   Header,
@@ -114,7 +113,7 @@ const ViewProvider = () => {
 
   return (
     <>
-      <Container maxWidth="xl" className={classes.container}>
+      <Box className={classes.container}>
         <Header />
         <Box my={2}>
           <ProviderHeader />
@@ -148,8 +147,8 @@ const ViewProvider = () => {
           </Box>
         </Paper>
         {/* Temp. solution to create space for drawer. */}
-        <Box py={4}></Box>
-      </Container>
+        <Box py={4} />
+      </Box>
       <Drawer anchor="bottom" variant="permanent">
         <Paper square>
           <Box p={2}>
@@ -159,8 +158,9 @@ const ViewProvider = () => {
               justifyContent="flex-end"
               alignItems="center"
             >
-              {requiredFields.map((data) => (
+              {requiredFields.map((data, index) => (
                 <Grid
+                  key={index}
                   item
                   style={{
                     color: consultInformation[data.stateKey] ? "green" : "#bbb",
@@ -181,6 +181,8 @@ const ViewProvider = () => {
               ))}
               <Grid item>
                 <Button
+                  variant="contained"
+                  disableElevation
                   color="secondary"
                   disabled={
                     !consultInformation.medicalNote ||

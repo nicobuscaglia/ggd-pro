@@ -1,6 +1,5 @@
 import {
   TextField,
-  makeStyles,
   Paper,
   Box,
   Typography,
@@ -8,8 +7,9 @@ import {
   Card,
   CardContent,
   IconButton,
-} from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab";
+  Autocomplete,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import { useState } from "react";
 
@@ -32,7 +32,7 @@ const useClasses = makeStyles((theme) => ({
   input: {
     backgroundColor: "#f7f7f7",
     color: theme.palette.grey[600],
-    padding: "0.5rem 1rem",
+    padding: "0.5rem 1rem !important",
     borderRadius: theme.shape.borderRadius,
     "& .MuiAutocomplete-endAdornment": {
       right: "0.5rem",
@@ -57,7 +57,7 @@ const Diagnosis = () => {
     );
 
   return (
-    <Paper style={{ height: "100%" }}>
+    <Paper style={{ height: "100%", boxShadow: "none" }}>
       <Box p={2}>
         <Typography variant="h6" paragraph>
           Diagnosis
@@ -69,17 +69,17 @@ const Diagnosis = () => {
           id="diagnosis-lookup"
           options={MOCK_OPTIONS}
           getOptionLabel={(option) => option.label}
-          getOptionSelected={(option, value) => option.label === value.label}
           renderInput={(params) => (
             <TextField
               {...params}
               placeholder="Search keywords or icd.10"
+              variant="standard"
               autoFocus
               fullWidth
               InputProps={{
                 ...params.InputProps,
-                disableUnderline: true,
                 className: classes.input,
+                disableUnderline: true,
               }}
             />
           )}
@@ -103,7 +103,7 @@ const Diagnosis = () => {
                           {diagnosis.details}
                         </Typography>
                       )}
-                      <Box align="right" mt={1}>
+                      <Box display="flex" justifyContent="flex-end" mt={1}>
                         <IconButton onClick={() => handleDelete(diagnosis)}>
                           <HighlightOffRoundedIcon />
                         </IconButton>

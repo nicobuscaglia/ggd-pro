@@ -1,5 +1,6 @@
 import React from "react";
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { TextBubble } from "./TextBubble";
 import { getChatDateTime } from "../utils";
 import { CONVERSATION_MESSAGE_TYPES } from "../Chat/contants";
@@ -128,7 +129,11 @@ const UserAnswerGroup = ({
               </Grid>
             )} */}
             <Grid item className={classes.dateTimeContainerRight}>
-              {messageTime && getChatDateTime(messageTime)}
+              {messageTime && (
+                <Typography variant="body2">
+                  {getChatDateTime(messageTime)}
+                </Typography>
+              )}
             </Grid>
           </Grid>
         </Grid>

@@ -1,6 +1,5 @@
 import React from "react";
-import { Grid, Box } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+import { Grid, Box, Skeleton } from "@mui/material";
 import PropTypes from "prop-types";
 
 const TypingIndicator = ({ size = 6 }) => {

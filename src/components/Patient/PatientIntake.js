@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 import { ProviderAccordion } from "../ProviderAccordion.js";
 import { CONVERSATION_EXAMPLE } from "../utils/conversation-example.js";
 

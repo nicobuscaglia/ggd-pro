@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "standard",
+    "standard-jsx",
+    "standard-react",
+    "prettier"
+  ],
+  "parser": "babel-eslint",
+  "ignorePatterns": ["temp.js", "**/images/*"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  }
+}

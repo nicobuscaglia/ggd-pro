@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
-import { Box, makeStyles} from "@material-ui/core";
+import { Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { MemberChat } from "./MemberChat";
 import { v4 as uuidv4 } from "uuid";
 import { InputForm } from "../Form"

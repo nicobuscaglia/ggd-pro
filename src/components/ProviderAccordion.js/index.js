@@ -37,18 +37,14 @@ const ProviderAccordion = ({ data }) => {
 
     const ListDetails = ({ details }) => {
         const { value } = details;
-        return (
-        value.map((item) => {
-            return (
-              <Box display="flex" alignItems="center">
-                <CircleIcon
-                  sx={{ fontSize: "0.5rem", marginRight: "0.5rem" }}
-                />
-                <Typography>{item.name}</Typography>
-              </Box>
-            );
-        })
-        );
+        return value.map((item, index) => {
+          return (
+            <Box key={index} display="flex" alignItems="center">
+              <CircleIcon sx={{ fontSize: "0.5rem", marginRight: "0.5rem" }} />
+              <Typography>{item.name}</Typography>
+            </Box>
+          );
+        });
     };
 
   const Details = ({ details }) => {    
@@ -64,7 +60,7 @@ const ProviderAccordion = ({ data }) => {
               </Box>
             );
           default:
-            return;
+            return null;
         }
   }
 

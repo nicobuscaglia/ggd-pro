@@ -64,6 +64,12 @@ const typography = {
     lineHeight: 1.4,
     fontFamily: "'Roboto', sans-serif",
   },
+  body4: {
+    fontWeight: 400,
+    fontSize: "0.6rem",
+    lineHeight: 1.4,
+    fontFamily: "'Roboto', sans-serif",
+  },
   button: {
     textTransform: "capitalize",
   },

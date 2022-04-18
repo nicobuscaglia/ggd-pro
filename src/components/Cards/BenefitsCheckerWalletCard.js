@@ -1,5 +1,5 @@
 import { getFormattedDateTimeString } from "../utils";
-import { Paper, Box, Typography, Grid } from "@material-ui/core";
+import { Paper, Box, Typography, Grid } from "@mui/material";
 
 const MOCK_DATA = {
   dateOfRequest: "03/24/22",

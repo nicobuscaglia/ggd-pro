@@ -1,5 +1,5 @@
 import { AddressCard } from "../Cards";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 const PharmacyPreview = ({ pharmacy }) => {
   if (!pharmacy) return null;

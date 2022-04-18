@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@material-ui/core";
+import { Box, Button, TextField } from "@mui/material";
 import { Field, Form } from "react-final-form";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -23,7 +23,7 @@ const InputForm = ({ onSubmit }) => {
                   {...input}
                   autoFocus
                   InputProps={{
-                    disableUnderline: true,
+                    disableunderline: "true",
                     style: { fontSize: "1.3rem", fontWeight: 500 },
                   }}
                   // disabled={disabled}
