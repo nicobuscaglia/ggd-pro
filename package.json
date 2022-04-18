@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-config-standard-jsx": "^10.0.0",
@@ -56,6 +57,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.29.4",
     "fullstack-serverless": "^0.8.0",
     "prettier": "^2.4.1"
   }
