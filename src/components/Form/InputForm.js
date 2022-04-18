@@ -21,10 +21,11 @@ const InputForm = ({ onSubmit }) => {
               <Box display="flex">
                 <TextField
                   {...input}
+                  variant="standard"
                   autoFocus
                   InputProps={{
-                    disableunderline: "true",
                     style: { fontSize: "1.3rem", fontWeight: 500 },
+                    disableUnderline: true,
                   }}
                   // disabled={disabled}
                   fullWidth
@@ -33,6 +34,8 @@ const InputForm = ({ onSubmit }) => {
                   placeholder="Enter your response here"
                 />
                 <Button
+                  variant="contained"
+                  disableElevation
                   color="secondary"
                   aria-label="Submit"
                   //   disabled={!input.value}

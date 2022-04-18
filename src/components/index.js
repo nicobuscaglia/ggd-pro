@@ -1,5 +1,5 @@
 export { PatientIntake, SymptomBotResult, VitalsBotResult, BenefitsChecker } from "./Patient";
-export { Diagnosis, MedicalNotes, PatientNotes, EPrescribe } from "./Provider";
+export { Diagnosis, MedicalNotes, EPrescribe } from "./Provider";
 export { ProviderTabs } from "./ProviderTabs"
 export { VideoVisit } from "./VideoVisit";
 export { ChatHOC } from "./Chat/ChatHOC"

@@ -37,18 +37,19 @@ const TabPanel = (props) => {
   const { component, value, index, ...other } = props;
 
   return (
-    <div hidden={value !== index} {...other}>
+    <Box hidden={value !== index} {...other}>
       {value === index && <Box>{component}</Box>}
-    </div>
+    </Box>
   );
 };
 
-const ProviderTabs = ({ tabs }) => {
+const ProviderTabs = ({ tabs, setTabSelected = () => {} }) => {
   const classes = useClasses();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setTabSelected(newValue)
   };
 
   return (

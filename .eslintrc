@@ -6,9 +6,16 @@
     "prettier"
   ],
   "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,   
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+   }
+  },
   "ignorePatterns": ["temp.js", "**/images/*"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "no-unused-vars": "off"
   }
 }

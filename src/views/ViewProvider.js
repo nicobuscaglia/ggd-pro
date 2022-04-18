@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Typography,
   Box,
@@ -12,17 +12,16 @@ import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import {
   Header,
   ProviderHeader,
-  Diagnosis,
-  EPrescribe,
   MedicalNotes,
   PatientIntake,
-  PatientNotes,
   SymptomBotResult,
   VitalsBotResult,
   BenefitsChecker,
   ProviderTabs,
   VideoVisit,
   ChatHOC,
+  Diagnosis, 
+  EPrescribe
 } from "../components";
 import { useParams } from "react-router-dom";
 
@@ -53,33 +52,31 @@ const useClasses = makeStyles((theme) => ({
   },
 }));
 
-const ResultsTabs = [
+const MEDICAL_NOTES = [
   {
-    title: "Patient Intake",
-    component: <PatientIntake />,
-  },
-  {
-    title: "SymptomBot",
-    component: <SymptomBotResult />,
-  },
-  {
-    title: "VitalsBot",
-    component: <VitalsBotResult />,
-  },
-  {
-    title: "BenefitsChecker",
-    component: <BenefitsChecker />,
-  },
-];
+    id: 1,
+    name: 'James May NP',
+    avatar: 'JM',
+    dateTime: new Date(),
+    message: 'This is a medical note.'
+  }
+]
 
-const requiredFields = [
-  { label: "Medical Notes", stateKey: "medicalNote" },
-  { label: "Patient Notes", stateKey: "patientNote" },
-];
+const DIAGNOSIS_NOTES = [
+  {
+    id: 1,
+    name: 'James May NP',
+    avatar: 'JM',
+    dateTime: new Date(),
+    message: 'This is a diagnosis note.'
+  }
+]
 
 const ViewProvider = () => {
   const classes = useClasses();
   const { type } = useParams();
+  const [requiredFields, setRequiredFields] = useState([]);
+  const [tabSelected, setTabSelected] = useState(0)
 
   const [consultInformation, setConsultInformation] = useState({});
 
@@ -90,23 +87,137 @@ const ViewProvider = () => {
     }));
   };
 
+  const onPatientInfo = (data) => {
+    console.log('NMB', data)
+  }
+
+  const onSubmit = () => {
+    console.log('submit')
+  }
+
+  useEffect(() => {
+    setRequiredFields([
+      { label: "Medical Note", stateKey: "medicalNote" },
+      {
+        label: EndVisitTabs[tabSelected].title,
+        stateKey: EndVisitTabs[tabSelected].stateKey,
+      },
+    ]);
+  }, [])
+
+  useEffect(() => {
+    if (EndVisitTabs[tabSelected]?.title) {
+      setRequiredFields([
+        { label: "Medical Note", stateKey: "medicalNote" },
+        {
+          label: EndVisitTabs[tabSelected].title,
+          stateKey: EndVisitTabs[tabSelected].stateKey,
+        },
+      ]);
+    }
+  }, [tabSelected])
+
+
+  const ResultsTabs = [
+    {
+      title: "Patient Intake",
+      component: <PatientIntake />,
+    },
+    {
+      title: "SymptomBot",
+      component: <SymptomBotResult />,
+    },
+    {
+      title: "VitalsBot",
+      component: <VitalsBotResult />,
+    },
+    {
+      title: "BenefitsChecker",
+      component: <BenefitsChecker />,
+    },
+  ];
+
   const NotesTabs = [
     {
       title: "Medical Notes",
       component: (
-        <MedicalNotes
-          consultInformation={consultInformation}
-          updateConsultInformation={updateConsultInformation}
-        />
+        <Box p={2}>
+          <MedicalNotes
+            consultInformation={consultInformation}
+            updateConsultInformation={updateConsultInformation}
+            noteType="medicalNote"
+            medicalNotes={MEDICAL_NOTES}
+            placeholder="medical"
+          />
+        </Box>
+      ),
+    },
+  ];
+
+  const EndVisitTabs = [
+    {
+      title: "Diagnosis",
+      stateKey: "diagnosis",
+      component: (
+        <Box p={2}>
+          <Box mb={2}>
+            <MedicalNotes
+              consultInformation={consultInformation}
+              updateConsultInformation={updateConsultInformation}
+              noteType="diagnosis"
+              medicalNotes={DIAGNOSIS_NOTES}
+              placeholder="diagnosis"
+            />
+          </Box>
+          <Box mb={2}>
+            <Diagnosis />
+          </Box>
+          <Box>
+            <EPrescribe />
+          </Box>
+        </Box>
       ),
     },
     {
-      title: "Patient Notes",
+      title: "Refer Out",
+      stateKey: 'referOut',
       component: (
-        <PatientNotes
-          consultInformation={consultInformation}
-          updateConsultInformation={updateConsultInformation}
-        />
+        <Box p={2}>
+          <MedicalNotes
+            consultInformation={consultInformation}
+            updateConsultInformation={updateConsultInformation}
+            noteType="referOut"
+            placeholder="refer out"
+          />
+        </Box>
+      ),
+    },
+    {
+      title: "No-Show",
+      stateKey: 'noShow',
+      component: (
+        <Box p={2}>
+          <MedicalNotes
+            consultInformation={consultInformation}
+            updateConsultInformation={updateConsultInformation}
+            noteType="noShow"
+            placeholder="no-show"
+          />
+        </Box>
+      ),
+    },
+    {
+      title: "Other",
+      stateKey: 'other',
+      component: (
+        <Box p={2}>
+          <MedicalNotes
+            consultInformation={consultInformation}
+            updateConsultInformation={updateConsultInformation}
+            noteType="other"
+            placeholder="other"
+          />
+        </Box>
       ),
     },
   ];
@@ -137,11 +248,11 @@ const ViewProvider = () => {
               <Grid item xs={12} sm={4}>
                 <ProviderTabs tabs={NotesTabs} />
               </Grid>
-              <Grid item xs={12} sm={4}>
-                <Diagnosis />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <EPrescribe />
+              <Grid item xs={12} sm={8}>
+                <ProviderTabs
+                  tabs={EndVisitTabs}
+                  setTabSelected={setTabSelected}
+                />
               </Grid>
             </Grid>
           </Box>
@@ -186,8 +297,9 @@ const ViewProvider = () => {
                   color="secondary"
                   disabled={
                     !consultInformation.medicalNote ||
-                    !consultInformation.patientNote
+                    !consultInformation[EndVisitTabs[tabSelected].stateKey]
                   }
+                  onClick={onSubmit}
                 >
                   Complete Visit
                 </Button>

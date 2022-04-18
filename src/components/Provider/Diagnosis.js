@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MOCK_OPTIONS = [
   {
@@ -30,7 +30,7 @@ const MOCK_OPTIONS = [
 
 const useClasses = makeStyles((theme) => ({
   input: {
-    backgroundColor: "#f7f7f7",
+    backgroundColor: theme.palette.background.default,
     color: theme.palette.grey[600],
     padding: "0.5rem 1rem !important",
     borderRadius: theme.shape.borderRadius,
@@ -57,7 +57,9 @@ const Diagnosis = () => {
     );
 
   return (
-    <Paper style={{ height: "100%", boxShadow: "none" }}>
+    <Paper
+      style={{ height: "100%", boxShadow: "none", backgroundColor: "#F7F7F7" }}
+    >
       <Box p={2}>
         <Typography variant="h6" paragraph>
           Diagnosis
@@ -74,7 +76,6 @@ const Diagnosis = () => {
               {...params}
               placeholder="Search keywords or icd.10"
               variant="standard"
-              autoFocus
               fullWidth
               InputProps={{
                 ...params.InputProps,
