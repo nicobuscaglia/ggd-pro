@@ -5,7 +5,7 @@
     "standard-react",
     "prettier"
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "ignorePatterns": ["temp.js", "**/images/*"],
   "rules": {
     "react/react-in-jsx-scope": "off",
