@@ -5,19 +5,18 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@material-ui/core": "^4.12.4",
-    "@material-ui/lab": "^4.0.0-alpha.61",
     "@mui/icons-material": "^5.6.1",
     "@mui/material": "^5.6.1",
+    "@mui/styles": "^5.6.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "final-form": "^4.20.6",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-final-form": "^6.5.9",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^5.0.1",
     "string-strip-html": "^9.1.9",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
@@ -26,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix --ext .js,.jsx .",
+    "prettier": "prettier --write src/**/*.js"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +48,15 @@
     ]
   },
   "devDependencies": {
-    "fullstack-serverless": "^0.8.0"
+    "babel-eslint": "^10.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-config-standard-jsx": "^10.0.0",
+    "eslint-config-standard-react": "^11.0.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "fullstack-serverless": "^0.8.0",
+    "prettier": "^2.4.1"
   }
 }

@@ -1,4 +1,4 @@
-import { Avatar as MuiAvatar } from "@material-ui/core";
+import { Avatar as MuiAvatar } from "@mui/material";
 
 const AMY_AVATAR_IMAGE =
   "https://ggd-static-resource-bucket-dev.s3.us-east-2.amazonaws.com/images/amyGGD.jpg";

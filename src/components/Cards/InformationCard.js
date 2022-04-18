@@ -4,8 +4,8 @@ import {
   Typography,
   Grid,
   Divider,
-  makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 const useClasses = makeStyles((theme) => ({
   subtitle: {

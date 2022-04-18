@@ -1,5 +1,6 @@
 import React from "react";
-import { Grid, Typography, makeStyles, Box } from "@material-ui/core";
+import { Grid, Typography, Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles({

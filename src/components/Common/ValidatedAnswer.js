@@ -1,5 +1,6 @@
 import React from "react";
-import { Grid, Box, makeStyles, Typography } from "@material-ui/core";
+import { Grid, Box, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 const useClasses = makeStyles((theme) => ({

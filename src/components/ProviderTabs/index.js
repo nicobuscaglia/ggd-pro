@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Box, Tabs, Tab, makeStyles } from "@material-ui/core";
+import { Box, Tabs, Tab } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 const useClasses = makeStyles((theme) => ({
   container: {
@@ -33,11 +34,11 @@ const useClasses = makeStyles((theme) => ({
 }));
 
 const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
+  const { component, value, index, ...other } = props;
 
   return (
     <div hidden={value !== index} {...other}>
-      {value === index && <Box>{children}</Box>}
+      {value === index && <Box>{component}</Box>}
     </div>
   );
 };
@@ -67,7 +68,7 @@ const ProviderTabs = ({ tabs }) => {
       {tabs.map((tab, index) => {
         return (
           <Box key={index} className={classes.fixedContainer}>
-            <TabPanel value={value} index={index} children={tab.component} />
+            <TabPanel value={value} index={index} component={tab.component} />
           </Box>
         );
       })}

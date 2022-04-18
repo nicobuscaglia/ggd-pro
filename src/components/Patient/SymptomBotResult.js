@@ -3,8 +3,8 @@ import {
   Grid,
   Typography,
   LinearProgress,
-  makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { MessageGroup } from "../Common";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { InformationCard } from "../Cards";

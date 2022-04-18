@@ -1,4 +1,4 @@
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import { MessageGroup, UserAnswerGroup } from '../Common';
 import { stripHtml } from "string-strip-html";
 

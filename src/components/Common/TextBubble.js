@@ -1,25 +1,19 @@
-import React from "react";
 import {
-  Paper as MuiPaper,
-  withStyles,
+  Paper,
   Box,
   Typography,
-  makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
 
-const Paper = withStyles({
-  root: {
-    display: "inline-block",
-    border: 0,
-    borderRadius: "20px",
-  },
-})(MuiPaper);
-
 const useStyles = makeStyles((theme) => ({
+  paper: {
+    display: "inline-block",
+  },
   paperLeft: {
     position: "relative",
     border: "1px solid",
+    borderRadius: "0 20px 20px 20px !important",
     borderColor: theme.palette.grey[300],
   },
   paperLeftLast: {
@@ -54,12 +48,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paperRight: {
-    background: "#222525",
-    color: "#fff",
+    background: "#222525 !important",
+    color: "#fff !important",
+    borderRadius: "20px 0 20px 20px !important",
   },
   paperRightLast: {
     position: "relative",
-    borderTopRightRadius: 0,
+    borderTopRightRadius: "0 !important",
     "&::before": {
       content: "''",
       position: "absolute",
@@ -88,7 +83,10 @@ const TextBubble = ({ content, last = true, alignRight = false }) => {
   return (
     <Box>
       <Paper
-        className={`${alignRight ? classes.paperRight : classes.paperLeft} ${
+        elevation={0}
+        className={`${classes.paper} ${
+          alignRight ? classes.paperRight : classes.paperLeft
+        } ${
           last
             ? alignRight
               ? classes.paperRightLast

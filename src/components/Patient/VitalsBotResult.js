@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 // import { v4 as uuidv4 } from "uuid";
 import { MessageGroup } from "../Common/MessageGroup";
 // import { getMemberClinicalResult, notifyAppNotification } from "../../events";
@@ -23,19 +24,13 @@ const useClasses = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-between",
     padding: "0.4rem",
-    backgroundColor: theme.palette.background,
+    backgroundColor: theme.palette.background.default,
     borderRadius: "0.5rem",
     boxShadow: "0 0 5px rgb(0 0 0 / 20%)",
   },
   type: {
-    fontSize: "0.6rem",
-    fontWeight: "bold",
-    color: theme.palette.text.secondary,
+    fontWeight: 'bold !important',
     textTransform: "uppercase",
-  },
-  measurement: {
-    fontSize: "1.2rem",
-    fontWeight: "bold",
   },
 }));
 
@@ -165,11 +160,11 @@ const VitalsBotResult = ({ conversationId, showMessage = true }) => {
     }
     return (
       <Box className={classes.vitalSignContainer}>
-        <Typography variant="body2" className={classes.type}>
+        <Typography variant="body4" color="textSecondary" className={classes.type}>
           {name}
         </Typography>
         <Typography
-          className={classes.measurement}
+          variant="h5"
           style={{ color: getVitalSignColor(name, value, color) }}
         >
           {name === "Stress Level" ? stressLevel || "--" : value || "--"}

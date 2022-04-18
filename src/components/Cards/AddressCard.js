@@ -3,9 +3,9 @@ import {
   Box,
 //   IconButton,
 //   SvgIcon,
-  makeStyles,
   Paper,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles"
 import { DataGrid } from "../Common";
 // import { Marker } from "react-map-gl";
 // import Geocoding from "@mapbox/mapbox-sdk/services/geocoding";
@@ -36,11 +36,11 @@ const DATA_MAPPING = {
   },
 };
 
-const DEFAULT_MAP_CONFIG = {
-  latitude: 32.779167,
-  longitude: -96.808891,
-  zoom: 8,
-};
+// const DEFAULT_MAP_CONFIG = {
+//   latitude: 32.779167,
+//   longitude: -96.808891,
+//   zoom: 8,
+// };
 
 const useClasses = makeStyles((theme) => ({
   selectedContainer: {

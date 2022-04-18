@@ -1,4 +1,5 @@
-import { Typography, Box, makeStyles } from "@material-ui/core";
+import { Typography, Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 const useClasses = makeStyles((theme) => ({
@@ -6,7 +7,7 @@ const useClasses = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",
@@ -25,7 +26,7 @@ const useClasses = makeStyles((theme) => ({
     marginLeft: "7px",
   },
   visibleDot: {
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       display: "none !important",
     },
   },
